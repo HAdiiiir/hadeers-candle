@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductById } from '../services/productService';
 import { Product } from '../types/product';
-import Header from '../components/Header';
+import Header from '../components/layout/Header';
 import { FiShoppingCart } from 'react-icons/fi';
 
 // إنشاء مكون أيقونة مخصص
-const ShoppingCartIcon: React.FC<{ className?: string }> = ({ className }) => (
-    <FiShoppingCart className={className} />
-  );
-  
+const ShoppingCartIcon: React.FC<{ className?: string }> = ({ className }) => {
+  const Icon = FiShoppingCart as React.ComponentType<{ className?: string }>;
+  return <Icon className={className} />;
+};
+
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);

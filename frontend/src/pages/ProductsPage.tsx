@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProducts, getProductsByWaxType } from '../services/productService';
 import { Product, WaxType } from '../types/product';
-import ProductCard from '../components/ProductCard';
-import Header from '../components/Header';
+import ProductCard from '../components/ui/Cards/ProductCard';
+import Header from '../components/layout/Header';
 
 const ProductsPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -60,7 +60,14 @@ const ProductsPage: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {products.map(product => (
-              <ProductCard key={product._id} product={product} />
+              <ProductCard 
+              key={product._id}
+              id={product._id}
+              title={product.name}
+              price={product.price}
+              image={product.images[0]}
+              waxType={product.waxType}
+            />
             ))}
           </div>
         )}

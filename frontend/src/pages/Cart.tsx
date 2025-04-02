@@ -1,10 +1,24 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
+import Header from '../components/layout/Header';
 import { FiShoppingCart, FiTrash2, FiArrowLeft } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { IconType } from 'react-icons';
 
-// Temporary cart data structure
+// حل بديل بدون استخدام IconType
+const CartIcon: React.FC<{ className?: string }> = ({ className }) => {
+  const Icon = FiShoppingCart as React.ComponentType<{ className?: string }>;
+  return <Icon className={className} />;
+};
+
+const TrashIcon: React.FC<{ className?: string }> = ({ className }) => {
+  const Icon = FiTrash2 as React.ComponentType<{ className?: string }>;
+  return <Icon className={className} />;
+};
+
+const BackIcon: React.FC<{ className?: string }> = ({ className }) => {
+  const Icon = FiArrowLeft as React.ComponentType<{ className?: string }>;
+  return <Icon className={className} />;
+};
+
 interface CartItem {
   id: string;
   name: string;
@@ -15,13 +29,7 @@ interface CartItem {
   waxType: string;
 }
 
-// Create typed icon components
-const CartIcon: IconType = FiShoppingCart;
-const TrashIcon: IconType = FiTrash2;
-const BackIcon: IconType = FiArrowLeft;
-
 const Cart: React.FC = () => {
-  // This would normally come from your cart context or state management
   const [cartItems, setCartItems] = useState<CartItem[]>([
     {
       id: '1',
@@ -64,7 +72,6 @@ const Cart: React.FC = () => {
       
       <main className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-8">
-          {/* Cart Items */}
           <div className="md:w-2/3">
             <div className="bg-white p-6 rounded-lg shadow-md">
               <div className="flex items-center justify-between mb-6">
@@ -135,7 +142,6 @@ const Cart: React.FC = () => {
             </div>
           </div>
 
-          {/* Order Summary */}
           <div className="md:w-1/3">
             <div className="bg-white p-6 rounded-lg shadow-md sticky top-4">
               <h2 className="text-xl font-bold text-amber-900 mb-4">Order Summary</h2>
